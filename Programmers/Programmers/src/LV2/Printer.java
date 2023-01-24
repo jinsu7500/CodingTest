@@ -38,26 +38,112 @@ priorities	location	return
 문제 : 내가 인쇄를 요청한 문서가 몇번째로 인쇄되는지?
 ㄴ> 인쇄할때마다 COUNT ++
 ㄴ> location은 0부터시작
+ㄴ> 최초위치는 어떻게 저장할지?
 
  */
 
 package LV2;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 public class Printer {
-    public int solution(int[] priorities, int location) {
+    public int solution222(int[] priorities, int location) {
         
+        int answer = 1;
+        int myPrint = priorities[location];     //ex : 3
         //스택 선언
-        Stack<Integer> priorStack = new Stack<>();
-        
+        Stack<Integer> priorStack = new Stack<>();        
+        // Collections.sort(priorities,Collections.reverseOrder());        //내림차순
+
+        // // //내림차순 정렬
+        //  Integer[] arr = Arrays.stream(priorities).boxed().toArray(Integer[]::new);
+        // // int형배열 -> Intger배열로 boxing, (Primitive 자료형 -> Wrapper클래스)
+		// Arrays.sort(arr, Collections.reverseOrder());   //Arrays로 정렬
+
+        int arr[] = priorities;        
+        Arrays.sort(arr);       //오름차순 정렬
+               
         
         //스택 입력
-        for(int i = 0 ; i<priorStack.size(); i++){
-            System.out.println(i);
+        for(int i = 0 ; i<arr.length; i++){
+            priorStack.push(arr[i]);                //ex 2,1,3,2 -> 1,2,2,3
+        }   
+        
+        //스택이 없어질때까지(대기열 사라질때까지 반복)
+        while(!priorStack.isEmpty()){
+            //출력값과 일치되는 경우 탐색
+            for(int i : priorities){
+                System.out.println("최상위 스택(Peek) : " + priorStack.peek());
+                System.out.println("내출력물(myprint) : " + myPrint);
+                if(priorStack.peek() == myPrint){
+                    return answer;
+                }
+                else{
+                    priorStack.pop();
+                    answer++;
+                }
+                
+                //값이 일치하는경우 해당문서 출력
+                // if(priorStack.peek() == priorities[i]){
+                    
+                    // priorStack.pop();
+                    // answer++;
+                    // //값이랑 위치가 모두 일치하면 자기문서 반환
+                    // if(location == i)
+                    //     break;
+            }
+     
+     
         }
-        int answer = 0;
+        
         return answer;
+    }
+
+
+
+
+    //우선순위 큐활용
+    public int solution(int[] priorities, int location) {
+        
+        /**
+         * 높은숫자가 우선순위인 int형 우선순위 큐 선언 
+         * 메소드
+         * add() : 값추가, 예외경우 에러발생
+         * offer() : 값추가, 성공시 true, 실패시 false
+         * poll() : 첫번째 값을 반환하고 제거, 비어있으면 null
+         * remove() : 첫번째 값 제거 비어있으면 예외처리
+         * peek() : 첫번쨰값 반환(비어있으면 null)
+         * element() : 첫번째값 반환(비어있으면 예외발생), 
+         * clear() : 초기화
+        */
+        
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
+        int answer = 0;
+        //큐 입력
+        for(int i : priorities){
+            priorityQueue.offer(i);
+        }
+
+        //대기목록 없을떄까지반복
+        while(!priorityQueue.isEmpty()){
+            //우선순위 배열 탐색
+            for(int i = 0 ; i<priorities.length ; i++){
+                //값만 일치하는경우 해당문서 출력
+                if(priorityQueue.peek() == priorities[i]){
+                    priorityQueue.poll();
+                    answer++;
+                    //우선순위 값 + 위치가 모두 일치할경우 정답반환
+                    if(location == i ){
+                        return answer;
+                    }
+                }
+            }
+        }       
+        return answer;
+        
     }
     
 }
