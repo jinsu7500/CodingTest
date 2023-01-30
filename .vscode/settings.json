@@ -1,7 +1,5 @@
 {
     "java.project.sourcePaths": [
-        "Sol/Level2",
-        "Programmers/Programmers/src",
-        "Programmers/Programmers"
+        "Programmers/src"
     ]
 }
