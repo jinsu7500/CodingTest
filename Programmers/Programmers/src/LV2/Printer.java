@@ -132,8 +132,12 @@ public class Printer {
             //우선순위 배열 탐색
             for(int i = 0 ; i<priorities.length ; i++){
                 //값만 일치하는경우 해당문서 출력
+                System.out.println("peek :" + priorityQueue.peek());
+                System.out.println("priorities[i] : " +priorities[i]);
                 if(priorityQueue.peek() == priorities[i]){
-                    priorityQueue.poll();
+                    
+                    int poll = priorityQueue.poll();
+                    System.out.println("poll : " + poll);
                     answer++;
                     //우선순위 값 + 위치가 모두 일치할경우 정답반환
                     if(location == i ){
