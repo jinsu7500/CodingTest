@@ -64,6 +64,7 @@ public class longJump {
     }
 
 
+    //시간초과!
     public long solution2(int n) {
         long answer = 0;
         int test = fibonacci_rsv(n+1);
@@ -76,4 +77,41 @@ public class longJump {
         if(n <= 1) return n;
         else return fibonacci_rsv(n-2) + fibonacci_rsv(n-1);
     }
+
+
+    //시간초과!
+    public long solution3(int n) {
+        long answer = 0;
+        int test = fibonacci_rsv2(n+1);
+        System.out.println(test);
+        answer = (long) (test);
+        return answer;
+    }
+    
+    public int fibonacci_rsv2(int n){
+        if(n <= 1) return n;
+        else return (fibonacci_rsv2(n-2) + fibonacci_rsv2(n-1)) %1234567;
+    }
+
+
+    //최종답안!!
+    //결과값 나머지를 미리 구함? 
+    public long solution4(int n) {        
+
+        if(n<=1) return n;  //n이 1보다 작을 때에는 값 반환
+        else{
+            long answer = 0;
+            long A = 0;             
+            long B = 1;         
+
+            for(int i = 2 ; i<=n; i++){                
+                answer = (A + B) % 1234567;
+                A = B;
+                B = answer;
+            }            
+            return answer;
+        }
+    }
+
+
 }
