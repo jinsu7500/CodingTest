@@ -1,5 +1,6 @@
 {
     "java.project.sourcePaths": [
-        "Programmers/src"
+        "Programmers/src",
+        "BaekJoon"
     ]
 }
