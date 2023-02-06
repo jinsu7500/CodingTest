@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.StringTokenizer;
+
+import LV2.Spy;
 public class App {
     public static void main(String[] args) throws Exception {  
         // //BufferReader,BufferWriter 선언
@@ -30,5 +32,12 @@ public class App {
         //     bfw.flush();            
         // }
         // bfw.close();
+
+        Spy test = new Spy();
+        String[][] testCase = {{"yellow_hat", "headgear"}, {"blue_sunglasses", "eyewear"}, {"green_turban", "headgear"}};
+        String[][] testCase2 = {{"crow_mask", "face"}, {"blue_sunglasses", "face"}, {"smoky_makeup", "face"}};
+
+        System.out.println(test.solution(testCase));
+        System.out.println(test.solution(testCase2));
     }
 }
