@@ -1,4 +1,6 @@
 /**
+ * <알고리즘 스터디 29회차 2023.02.09>
+ *  LV2_위장 : https://school.programmers.co.kr/learn/courses/30/lessons/42578
  * 위장
 문제 설명
 스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다.
