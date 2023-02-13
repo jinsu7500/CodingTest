@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+import LV2.ContinuousSeq;
 import LV2.H_Index;
 
 
@@ -26,9 +27,9 @@ public class App {
         // int min = arr[count-1];
         // System.out.println(max*min);
 
-        H_Index test = new H_Index();
-        int testCase[] = {3,0,6,1,5};        
+        ContinuousSeq test = new ContinuousSeq();        
+        int testCase[] = {7,9,1,1,4};        
 
-        System.out.println(test.solution(testCase));
+        System.out.println(test.solution2(testCase));
     }
 }
