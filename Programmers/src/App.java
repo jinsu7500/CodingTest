@@ -4,6 +4,7 @@ import java.util.StringTokenizer;
 
 import LV2.ContinuousSeq;
 import LV2.H_Index;
+import LV2.SisoFriend;
 
 
 public class App {
@@ -27,9 +28,10 @@ public class App {
         // int min = arr[count-1];
         // System.out.println(max*min);
 
-        ContinuousSeq test = new ContinuousSeq();        
-        int testCase[] = {7,9,1,1,4};        
+        SisoFriend test = new SisoFriend();        
+        // int testCase[] = {100,180,360,100,270,100,100};        
+        int testCase[] = {100,180,360,100,270};      
 
-        System.out.println(test.solution2(testCase));
+        System.out.println(test.solution(testCase));
     }
 }
