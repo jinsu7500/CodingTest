@@ -59,8 +59,10 @@ public class SisoFriend {
         for(int i = 0; i < weights.length - 1; i++){
 
             /*
-             * weights[i]*2 >= weights[j] -> 정렬을 했기때문에 A보다 B가 무조건 큼, 시소의 젤앞자리가 2M좌석인데, 평행을 이루게 하려면 B의 최소값이 A의 2배가 되어야함
+             * weights[i]*2 >= weights[j] -> 정렬을 했기때문에
              *                                  ㄴ> 만약에 이분탐색&정렬을 안하게 된다면 시소 양쪽의 평행비를 다구해야하기때문에 타임아웃이 발생함
+             * 
+             * 경우의수 줄이기 ->  정렬했기때문에 a x w1  > b x w2  가 되는 조건들은 신경 안 써도됨
              */
             for(int j = i+1; j < weights.length && weights[i]*2 >= weights[j]; j++){                
                 //같을떄
