@@ -22,6 +22,79 @@ weights	result
  */
 
 
+
+// 2023.02.18 코드수정
+import java.util.Arrays;
+class Solution {
+    public long solution(int[] weights) {
+        long answer = 0;        
+        Arrays.sort(weights);
+        int dup=0;
+        for(int i = 0; i < weights.length - 1; i++){
+            
+            //중복제거
+            if( i > 0 && weights[i] == weights[i-1]){
+                dup--;
+                // System.out.println("minus dup : "+dup);
+                answer += dup;
+                // System.out.println("중복값제거 answer : "+answer);
+                continue;
+            }
+            
+            int right = findRight(weights,weights[i],i+1);
+            dup = 0;
+            
+            //이진탐색으로 오른쪽 범위 최대값 구하기           
+            // for(int j = i+1; j < weights.length && weights[i]*2 >= weights[j]; j++)            
+            for(int j = i+1 ; j <= right ; j++)
+            {
+               if(weights[i] == weights[j]){
+                    // answer++;
+                    dup++;
+                }
+         
+                else if(weights[i]*3 == weights[j]*2){
+                    // answer++;
+                    dup++;
+                }
+                else if(weights[i]*2 == weights[j]){
+                    // answer++;
+                    dup++;
+                }                
+                else if(weights[i]*4 == weights[j]*3){
+                    // answer++;
+                    dup++;
+                }   
+                
+            }  //내부for문 종료
+            
+            answer += dup;
+            }// for문 종료
+        return answer;
+       }
+    
+    
+    
+    public int findRight(int[]w, int now, int nowLeft){
+        int left = nowLeft;
+        int right = w.length - 1;
+        
+        //이진탐색
+        while(left < right){
+            int mid = left + (right - left) /2;
+            if(w[mid] > now*2)
+                return mid;
+            else
+                left = mid +1;
+        }
+        return left;        
+    }
+}
+
+************************************************************************************* */
+
+/*
+
 package LV2;
 
 import java.util.Arrays;
@@ -98,7 +171,7 @@ public class SisoFriend {
         }
         return answer;
     }
-
+*/
     /*
     ************************************************************************************* */
 
