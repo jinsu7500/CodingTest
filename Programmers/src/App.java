@@ -4,6 +4,7 @@ import java.util.StringTokenizer;
 
 import LV2.ContinuousSeq;
 import LV2.H_Index;
+import LV2.NumberCardDiv;
 import LV2.SisoFriend;
 
 
@@ -28,10 +29,10 @@ public class App {
         // int min = arr[count-1];
         // System.out.println(max*min);
 
-        SisoFriend test = new SisoFriend();        
-        // int testCase[] = {100,180,360,100,270,100,100};        
-        int testCase[] = {100,180,360,100,270};      
+        NumberCardDiv test = new NumberCardDiv();                           
+        int arrA[] = {10,17};
+        int arrB[] = {5,20};
 
-        System.out.println(test.solution(testCase));
+        System.out.println(test.solution(arrA,arrB));
     }
 }

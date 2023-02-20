@@ -1,3 +1,5 @@
+package LV2;
+
 /**
  * * <알고리즘 스터디 30회차 2023.02.16>
  *  LV2_시소짝궁 : https://school.programmers.co.kr/learn/courses/30/lessons/152996
@@ -25,7 +27,7 @@ weights	result
 
 // 2023.02.18 코드수정
 import java.util.Arrays;
-class Solution {
+public class SisoFriend {
     public long solution(int[] weights) {
         long answer = 0;        
         Arrays.sort(weights);
@@ -91,10 +93,10 @@ class Solution {
     }
 }
 
-************************************************************************************* */
+/************************************************************************************* */
 
 /*
-
+/*
 package LV2;
 
 import java.util.Arrays;
@@ -136,7 +138,7 @@ public class SisoFriend {
              *                                  ㄴ> 만약에 이분탐색&정렬을 안하게 된다면 시소 양쪽의 평행비를 다구해야하기때문에 타임아웃이 발생함
              * 
              * 경우의수 줄이기 ->  정렬했기때문에 a x w1  > b x w2  가 되는 조건들은 신경 안 써도됨
-             */
+             
             for(int j = i+1; j < weights.length && weights[i]*2 >= weights[j]; j++){                
                 //같을떄
                 if(weights[i] == weights[j]){
@@ -358,4 +360,7 @@ public class SisoFriend {
 
     //     return dup;
     // }
-}       
+//}       
+
+
+
