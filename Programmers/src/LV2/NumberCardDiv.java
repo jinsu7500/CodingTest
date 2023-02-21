@@ -42,8 +42,8 @@ public class NumberCardDiv {
         int gcdA = 0;
         int gcdB = 0;
 
-        // Arrays.sort(arrayA);
-        // Arrays.sort(arrayB);
+        Arrays.sort(arrayA);
+        Arrays.sort(arrayB);
 
         //arrA와 arrB의 길이는 같음
         //각배열의 최대공약수 구하기
