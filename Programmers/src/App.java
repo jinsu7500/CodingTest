@@ -4,6 +4,7 @@ import java.util.StringTokenizer;
 
 import LV2.ContinuousSeq;
 import LV2.H_Index;
+import LV2.HotelReservation;
 import LV2.NumberCardDiv;
 import LV2.SisoFriend;
 
@@ -29,10 +30,17 @@ public class App {
         // int min = arr[count-1];
         // System.out.println(max*min);
 
-        NumberCardDiv test = new NumberCardDiv();                           
-        int arrA[] = {10,17};
-        int arrB[] = {5,20};
+        HotelReservation test = new HotelReservation();                           
+        String testcase[][] = {{"15:00", "17:00"}, {"16:40", "18:20"}, {"14:20", "15:20"}, {"14:10", "19:20"}, {"18:20", "21:20"}};
+        String testcase2[][] = {{"09:10", "10:10"},{"10:20","12:20"}};
+        String testcase3[][] = {{"10:20", "12:30"}, {"10:20", "12:30"}, {"10:20", "12:30"}};
+        String testcase4[][] = {{"16:00", "16:10"},{"16:20","16:30"},{"16:53","16:55"}};
+        
 
-        System.out.println(test.solution(arrA,arrB));
+
+        // System.out.println(test.solution(testcase));
+        // System.out.println(test.solution(testcase2));
+        // System.out.println(test.solution(testcase3));
+        System.out.println(test.solution(testcase4));
     }
 }
