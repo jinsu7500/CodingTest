@@ -35,7 +35,7 @@ example1
 package LV2;
 
 public class HotelReservation {
-    static int roomTimeTable[][] = new int[25][60];
+    static int roomTimeTable[][] = new int[24][60];
 
     public int solution(String[][] book_time) {
         int answer = 0;
@@ -67,6 +67,7 @@ public class HotelReservation {
         return answer;
     }
 
+    //예약함수
     public int reservation(int startTime, int entTime){
         int startTime_Hour = startTime / 100;
         int startTime_Min = startTime % 100;
@@ -76,38 +77,34 @@ public class HotelReservation {
 
         //청소시간 10분 추가
         endTime_Min += 10;
-        //선처리 퇴실시간의 분이 51분+@ 일때, 청소시간 +10을 해주면 에러가남
+        //선처리(예외처리) 퇴실시간의 분이 51분+@ 일때, 청소시간 +10을 해주면 에러가남
         if(endTime_Min > 59){
-            System.out.println("edMin : " + endTime_Min);
+            // System.out.println("edMin : " + endTime_Min);
             endTime_Min = endTime_Min - 60;
             endTime_Hour++;
+
+            //23:59 고정
+            if(endTime_Hour == 24){
+                endTime_Hour = 23;
+                endTime_Min = 59;
+            }
         }
 
-        //시간 ->  시간계산 로직 생각해야됨
-        // for(int i = startTime_Hour; i <= endTime_Hour ; i++){
-        //     for(int j = startTime_Min ; j <= endTime_Min + 10 ; j++){
-        //         roomTimeTable[i][j] += 1;
-        //         System.out.print(roomTimeTable[i][j]);
-        //     }
-        //     System.out.println();
-        // }\
-
-        //1. 같은시간 퇴실
-            //ex-> 1500,1501,1502,1503,... 1550
-            //startHour == endHour -> startMin~endMin
+        //Case1. 같은시간 퇴실
+        //ex-> 1500,1501,1502,1503,... 1550            
         if(startTime_Hour == endTime_Hour){
             // 퇴실시각+청소시각 = 입실시각이면 입실처리됨
             for(int i = startTime_Min ; i < endTime_Min ; i++ ){
                 roomTimeTable[startTime_Hour][i] += 1;
             }
         }
-        //2. 다른시간 퇴실
+        //Case2. 다른시간 퇴실
         //ex -> 1500, 1501... 1559, 1601...~1620
-            // startHour != endHour
-            //ㄴ> 시간차이만큼 반복,반복구가 endTime이 되면 분에서 탈출
+        // startHour != endHour
+        //ㄴ> 시간차이만큼 반복,반복구가 endTime이 되면 분에서 탈출
         else if(startTime_Hour != endTime_Hour){
             for(int i = startTime_Hour ; i <= endTime_Hour ; i++){
-                //퇴실시각 '시'가 되면
+                //Case2.1 퇴실시각 '시'가 되면
                 if(i == endTime_Hour){
                     // 퇴실시각+청소시각 = 입실시각이면 입실처리됨
                     for(int lastTime_Min = 0 ; lastTime_Min < endTime_Min; lastTime_Min++){
@@ -115,13 +112,13 @@ public class HotelReservation {
                     }
                 }
 
-                //입실시각 계산할때
+                //Case2.2 입실시각 계산할때
                 else if(i == startTime_Hour){
                     for(int firstTime_Min = startTime_Min ; firstTime_Min < 60 ; firstTime_Min++){
                         roomTimeTable[i][firstTime_Min] += 1;
                     }
                 }
-                //그이외 00~59 까지
+                //Case2.3 그 이외 00~59 까지 예약
                 else{
                     for(int j = 0 ; j<60 ; j++){
                         roomTimeTable[i][j] += 1;
