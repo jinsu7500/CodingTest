@@ -7,6 +7,7 @@ import LV2.DeliveryBox;
 import LV2.H_Index;
 import LV2.HotelReservation;
 import LV2.NumberCardDiv;
+import LV2.PaintOver;
 import LV2.SisoFriend;
 
 
@@ -31,12 +32,12 @@ public class App {
         // int min = arr[count-1];
         // System.out.println(max*min);
         
-        DeliveryBox test = new DeliveryBox();
-        int[] testcaset = {4,3,1,2,5};
-        int[] testcaset2 = {5,4,3,2,1};
+        PaintOver test = new PaintOver();
+        // int[] testcase = {1,3};
+        // System.out.println(test.solution(5, 4, testcase));
 
-        System.out.println(test.solution(testcaset));
-        System.out.println(test.solution(testcaset2));
+        int[] testcase = {2,3,6};
+        System.out.println(test.solution(8, 4, testcase));
 
     }
 }
