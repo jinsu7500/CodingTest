@@ -25,9 +25,9 @@ public class Main {
         String[] testCase2 = {"hello", "observe", "effect", "take", "either", "recognize", "encourage", "ensure", "establish", "hang", "gather", "refer", "reference", "estimate", "executive"};
         String[] testCase3 = {"hello", "one", "even", "never", "now", "world", "draw"};
 
-        // int[] tt = test.solution(3, testCase);
+        
         int[] tt = test.solution(5, testCase2);
-        // int[] tt = test.solution(2, testCase3);
+        
         
         System.out.println(tt[0] + "," + tt[1]);
     
