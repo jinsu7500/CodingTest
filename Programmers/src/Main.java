@@ -1,36 +1,50 @@
 import java.io.*;
 import java.util.*;
 
-import LV2.EnglishFollowUp;
+import LV2.BestAlbum;
+
+
 
 public class Main {
     public static void main(String[] args) throws IOException {  
-        // //BufferReader 선언
+        // // //BufferReader 선언
         // BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));  
-        // StringTokenizer st = new StringTokenizer(bfr.readLine()," ");
+        // int N = Integer.parseInt(bfr.readLine());
 
-        // int n = Integer.parseInt(st.nextToken());
-        // int m = Integer.parseInt(st.nextToken());
-
-        // //arr input
-        // int[] arr = new int[n];
-        // for(int i = 0 ; i<n ; i++){
-        //     arr[0] = i+1;
+        // HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+        // StringTokenizer st;
+        // st = new StringTokenizer(bfr.readLine()," ");
+        // for(int i = 0 ; i < N ; i++){        
+        //     int key = Integer.parseInt(st.nextToken());
+        //     map.put(key,map.getOrDefault(key, 0) + 1);           
         // }
 
-        // //{1,2,3}
+        // int key2 = Integer.parseInt(bfr.readLine());
+        // int answer = map.getOrDefault(key2, 0);
+        // System.out.println(answer);     
 
-        EnglishFollowUp test = new EnglishFollowUp();
-        String[] testCase = {"tank", "kick", "know", "wheel", "land", "dream", "mother", "robot", "tank"};
-        String[] testCase2 = {"hello", "observe", "effect", "take", "either", "recognize", "encourage", "ensure", "establish", "hang", "gather", "refer", "reference", "estimate", "executive"};
-        String[] testCase3 = {"hello", "one", "even", "never", "now", "world", "draw"};
+        BestAlbum test = new BestAlbum();
+        // String[] genres = {"classic", "pop", "classic", "classic", "pop"};
+        // int[] plays = {500, 600, 150, 800, 2500};
+        // int[] result = test.solution(genres, plays);
 
-        
-        int[] tt = test.solution(5, testCase2);
-        
-        
-        System.out.println(tt[0] + "," + tt[1]);
-    
+        // String[] genres = {"classic", "pop", "classic", "classic"};
+        // int[] plays = {800, 600, 150, 800};
+        // int[] result = test.solution(genres, plays);
+        //answser 0,3,1
+
+
+        String[] genres = {"pop", "pop", "pop", "rap", "rap"};
+        int[] plays = {45, 50, 40, 60, 70};
+        int[] result = test.solution(genres, plays);
+        ////answer 1,0,4,3
+
+
+
+
+        for(int i = 0 ; i<result.length ; i++){
+            System.out.print(result[i] + ",");
+        }
         
     }
 }
