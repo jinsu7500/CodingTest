@@ -1,4 +1,4 @@
-package LV2;
+package LV3;
 import java.util.*;
 public class BestAlbum {
     public int[] solution(String[] genres, int[] plays) {
