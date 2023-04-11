@@ -5,6 +5,7 @@ package LV3;
 
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class BannedUser {
     // public int solution(String[] user_id, String[] banned_id) {
@@ -98,13 +99,107 @@ public class BannedUser {
         
         //경우의수 조합 계산
     //    answer = calCase2(bannedCase,banned_id.length,user_id);
-       answer = calCase(bannedCase,banned_id.length,user_id);
+       answer = calCase3(bannedCase,banned_id.length,user_id);
        
        
        
        return answer;
     }
 
+    public static HashSet<HashSet<String>> answerSet = new HashSet<>();
+    public int calCase3(ArrayList<ArrayList<String>> bannedCase, int bannedCount,String[] user_id){
+        int depth = bannedCount-1;
+        HashSet<String> innerSet = new HashSet<>();
+        int[] indexArr = new int[bannedCount];          
+        Arrays.fill(indexArr, 0);
+          
+        while(true){  
+            Boolean isLastTerm = false;
+            innerSet = new HashSet<>();  
+            int setCount = 0;
+            for(int i = 0 ; i< bannedCount ; i++){
+                innerSet.add(bannedCase.get(i).get(indexArr[i]));
+                setCount++;
+                System.out.println("now 탐색값 : " + bannedCase.get(i).get(indexArr[i]));
+            }
+            System.out.println("사이클 종료 ");
+
+            if(innerSet.size() == bannedCount){
+                answerSet.add(innerSet);
+            }
+            
+            //말단++
+            indexArr[bannedCount-1]++;
+
+            //말단의말단까지 오면 depth감소 
+            // 상위까지 다돌았는지 확인
+             System.out.println("indexArr's depth " + indexArr[depth]);
+             System.out.println("bannedCase " + bannedCase.get(depth).size());
+             
+             for(int i = depth ; i < bannedCount; i++){
+                int maxCount = bannedCase.get(depth).size();
+                if(indexArr[i] >= maxCount-1  ){
+                    isLastTerm = true;
+                }
+                else{
+                    isLastTerm = false;
+                    break;
+                }
+             }
+            if(indexArr[bannedCount-1] == bannedCase.get(bannedCount-1).size() 
+               && setCount == bannedCount
+               && indexArr[depth]+1 >= bannedCase.get(depth).size()
+               && isLastTerm
+              ){
+                depth--;
+                indexArr[depth]++;
+                setCount = 0;
+                //하위뎁스 초기화
+                for(int i = depth+1 ; i< bannedCount; i++){
+                    indexArr[i] = 0;
+                }                
+            }
+            //
+            else if (indexArr[bannedCount-1] >= bannedCase.get(bannedCount-1).size()){
+                indexArr[depth]++;
+                //하위뎁스 초기화
+                for(int i = depth ; i< bannedCount; i++){
+                    indexArr[i]++;
+
+                    //범위벗어난거 수정
+                    if(indexArr[i] > bannedCase.get(i).size() && i != (bannedCount-1)){
+                        indexArr[i] = bannedCase.get(i).size()-1;        
+                    }
+                    else if(indexArr[bannedCount-1] >= bannedCase.get(bannedCount-1).size() && i == bannedCount-1){
+                        indexArr[bannedCount-1] = 0;
+                    }
+                } 
+            }
+        }
+
+
+
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     //문자열 같은지 검사하는 함수
     public boolean isEqual(String banned_id, String user_id){
         boolean isEqual = false;
@@ -287,5 +382,56 @@ public class BannedUser {
     //     }
     // }
     
+
+
+    private String[] userId;
+    private String[] bannedRegex;
+    private boolean[] checked;
+    private HashSet<HashSet<Integer>> resultSet;
+
+    public int solution_final(String[] user_id, String[] banned_id) {
+        userId = user_id;
+        checked = new boolean[user_id.length];
+        resultSet = new HashSet<>();
+        bannedRegex = new String[banned_id.length];
+        for (int i = 0; i < banned_id.length; i++) {
+            bannedRegex[i] = banned_id[i].replace("*", ".");
+        }
+        dfs(0, new HashSet<>());
+        return resultSet.size();
+    }
+
+    private void dfs(int index, HashSet<Integer> set) {
+        // 가장깊이 들어가서 더 탐색할 bannedRegex가 없다면 HashSet의 결과를 넣는다.
+        if (index == bannedRegex.length) {
+            resultSet.add(set);
+            return;
+        }
+        // 유저의 길이 만큼 탐색한다.
+        for (int i = 0; i < userId.length; i++) {
+            // bannedId의 조건에 userId가 만족할 경우 그리고 유저아이디가 한번도 탐색하지 않았을 경우
+            if (Pattern.matches(bannedRegex[index], userId[i]) && !checked[i]) {
+                // 해당 유저는 탐색을 해본 경우이므로 체크
+                checked[i] = true;
+                // set에 탐색을 한 경우를 추가한다.
+                set.add(i);
+                // banned_id를 한칸 더 들어가서 탐색한다.
+                dfs(index + 1, new HashSet<>(set));
+
+                // 해당 유저보다 깊은 곳은 탐색을 마쳤으므로
+                // 다시 돌아가서 다음 유저를 탐색하기 위해 checked 배열 과 Hashset을 초기화한다.
+                checked[i] = false;
+                set.remove(i);
+            }
+        }
+    }
+
+
     
 }
+
+
+
+
+
+    

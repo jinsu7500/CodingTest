@@ -54,7 +54,7 @@ public class Main {
         String[] banned_id = {"fr*d*", "*rodo", "******", "******"};
 
 
-        System.out.println(test.solution(user_id, banned_id));
+        System.out.println(test.solution_final(user_id, banned_id));
         
     }
 }
