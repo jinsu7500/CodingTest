@@ -3,6 +3,7 @@ import java.util.*;
 
 import LV3.BannedUser;
 import LV3.BestAlbum;
+import LV3.BestSet;
 
 
 
@@ -50,11 +51,20 @@ public class Main {
         // String[] banned_id = {"fr*d*", "abc1**"};
 
         //testcase2
-        String[] user_id = {"frodo", "fradi", "crodo", "abc123", "frodoc"};
-        String[] banned_id = {"fr*d*", "*rodo", "******", "******"};
+        // String[] user_id = {"frodo", "fradi", "crodo", "abc123", "frodoc"};
+        // String[] banned_id = {"fr*d*", "*rodo", "******", "******"};
 
 
-        System.out.println(test.solution_final(user_id, banned_id));
+        // System.out.println(test.solution_final(user_id, banned_id));
+
+
+        BestSet bestset = new BestSet();
+        // int n[] = bestset.solution(2, 9);
+        int n[] = bestset.solution(3, 11);
         
+        for(int i = 0; i < n.length ;i++){
+            System.out.print(n[i] + ", ");
+        }
+       
     }
 }
