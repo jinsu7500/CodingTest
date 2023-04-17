@@ -175,30 +175,8 @@ public class BannedUser {
                     }
                 } 
             }
-        }
-
-
-
-        
+        }        
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
     //문자열 같은지 검사하는 함수
     public boolean isEqual(String banned_id, String user_id){
@@ -220,10 +198,7 @@ public class BannedUser {
         return isEqual;
     }
 
-
-
-    public int calCase2(ArrayList<ArrayList<String>> bannedCase, int bannedCount,String[] user_id){
-        
+    public int calCase2(ArrayList<ArrayList<String>> bannedCase, int bannedCount,String[] user_id){        
         HashSet<ArrayList<String>> answerHashSet = new HashSet<>();
         ArrayList<Stack<String>> stackArrList = new ArrayList<>();
 
@@ -272,8 +247,7 @@ public class BannedUser {
      * @param  String[] user_id : 유저id 배열
      * 
      */
-    public int calCase(ArrayList<ArrayList<String>> bannedCase, int bannedCount,String[] user_id){
-        
+    public int calCase(ArrayList<ArrayList<String>> bannedCase, int bannedCount,String[] user_id){        
 
 
         // //j: 외부 경우의수
@@ -284,7 +258,7 @@ public class BannedUser {
             //중복계산
             HashMap<String,Integer> chkDupMap = new HashMap<>();        
             for(int dupchkIndex = 0 ; dupchkIndex<user_id.length ; dupchkIndex++){
-                chkDupMap.put(user_id[dupchkIndex],chkDupMap.getOrDefault(user_id[dupchkIndex], 0) +1);  
+                chkDupMap.put(user_id[dupchkIndex],chkDupMap.getOrDefault(user_id[dupchkIn  dex], 0) +1);  
             }
 
             // test.add("frodo");
@@ -384,8 +358,9 @@ public class BannedUser {
     
 
 
+    //전역변수 설정
     private String[] userId;
-    private String[] bannedRegex;
+    private String[] bannedId;
     private boolean[] checked;
     private HashSet<HashSet<Integer>> resultSet;
 
@@ -393,35 +368,35 @@ public class BannedUser {
         userId = user_id;
         checked = new boolean[user_id.length];
         resultSet = new HashSet<>();
-        bannedRegex = new String[banned_id.length];
+        bannedId = new String[banned_id.length];
         for (int i = 0; i < banned_id.length; i++) {
-            bannedRegex[i] = banned_id[i].replace("*", ".");
+            bannedId[i] = banned_id[i].replace("*", ".");
         }
         dfs(0, new HashSet<>());
         return resultSet.size();
     }
 
-    private void dfs(int index, HashSet<Integer> set) {
-        // 가장깊이 들어가서 더 탐색할 bannedRegex가 없다면 HashSet의 결과를 넣는다.
-        if (index == bannedRegex.length) {
-            resultSet.add(set);
+    private void dfs(int index, HashSet<Integer> innerSet) {
+        // index가 bannedid 길이만큼 되면, 말단까지 탐색한것이므로, 결과셋에 넣는다.
+        if (index == bannedId.length) {
+            resultSet.add(innerSet);
             return;
         }
-        // 유저의 길이 만큼 탐색한다.
+        // userid 배열의 길이만큼 탐색
         for (int i = 0; i < userId.length; i++) {
-            // bannedId의 조건에 userId가 만족할 경우 그리고 유저아이디가 한번도 탐색하지 않았을 경우
-            if (Pattern.matches(bannedRegex[index], userId[i]) && !checked[i]) {
-                // 해당 유저는 탐색을 해본 경우이므로 체크
+            // bannedId의 조건에 userId가 만족할 경우 && 탐색되지 않은 경우일때
+            if (Pattern.matches(bannedId[index], userId[i]) && !checked[i]) {
+                //탐색값 설정
                 checked[i] = true;
-                // set에 탐색을 한 경우를 추가한다.
-                set.add(i);
-                // banned_id를 한칸 더 들어가서 탐색한다.
-                dfs(index + 1, new HashSet<>(set));
+                // 내부 셋에 탐색을 한 경우를 추가
+                innerSet.add(i);
+                // index를 늘려 한칸 더 들어가서 탐색
+                dfs(index + 1, new HashSet<>(innerSet));
 
                 // 해당 유저보다 깊은 곳은 탐색을 마쳤으므로
-                // 다시 돌아가서 다음 유저를 탐색하기 위해 checked 배열 과 Hashset을 초기화한다.
+                // 다시 돌아가서 다음 유저를 탐색하기 위해 checked 배열 과 Hashset을 초기화.
                 checked[i] = false;
-                set.remove(i);
+                innerSet.remove(i);
             }
         }
     }
