@@ -1,6 +1,4 @@
 package LV3;
-
-import java.util.*;
 public class BaseStationins {
     public int solution(int n, int[] stations, int w) {
         int answer = 0;
@@ -44,3 +42,6 @@ public class BaseStationins {
         }
     }    
 }
+
+
+

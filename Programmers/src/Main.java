@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+import LV2.BilliardsPractice;
 import LV3.BannedUser;
 import LV3.BaseStationins;
 import LV3.BestAlbum;
@@ -45,13 +46,13 @@ public class Main {
         // for(int i = 0 ; i<result.length ; i++){
         //     System.out.print(result[i] + ",");
         // }
-        BaseStationins test = new BaseStationins();
-        // int[] stations = {4,11};
-        // System.out.println(test.solution(11, stations, 1));
-
-        int[] stations = {9};
-        System.out.println(test.solution(16, stations, 2));
-      
+        
+        BilliardsPractice test = new BilliardsPractice();
+        int balls[][] = {{7, 7}, {2, 7}, {7, 3}};
+        int result[] = test.solution(10, 10, 3, 7, balls);
+        for(int i = 0 ;i< result.length; i++){
+            System.out.print(result[i] + ", ");
+        }
        
     }
 }
