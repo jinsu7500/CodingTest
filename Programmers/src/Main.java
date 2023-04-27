@@ -48,8 +48,11 @@ public class Main {
         // }
         
         BilliardsPractice test = new BilliardsPractice();
-        int balls[][] = {{7, 7}, {2, 7}, {7, 3}};
-        int result[] = test.solution(10, 10, 3, 7, balls);
+        // int balls[][] = {{7, 7}, {2, 7}, {7, 3}};
+        // int result[] = test.solution(10, 10, 3, 7, balls);
+        int balls[][] = {{1,2}};
+        int result[] = test.solution(3, 3, 1, 1, balls);
+
         for(int i = 0 ;i< result.length; i++){
             System.out.print(result[i] + ", ");
         }
