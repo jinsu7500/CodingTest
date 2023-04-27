@@ -1,7 +1,8 @@
 class Solution {
     public int[] solution(int m, int n, int startX, int startY, int[][] balls) {
-int[] answer = new int[balls.length];
+        int[] answer = new int[balls.length];
         for(int i = 0 ;i<answer.length; i++){
+            // answer[i] = 10000;
             answer[i] = 1000000;
         }
 
@@ -22,8 +23,11 @@ int[] answer = new int[balls.length];
             //1. 위쪽벽에 맞는 경우
             //반례 -> x1=x2 , y1 < y2  
             // 같은 X축인데 나보다 위에있응경우는 불가능
-            if(!(stX == endX && stY < endY)){
-                //피타고라스로 구하면 가로변의 길이를 구하기 애매함
+            if(stX == endX && stY < endY){
+                // continue;
+            }
+            else{
+                //피타고라스로 구하면 가로변의 길이를 구하기 힘듬
                 //목표지점을 팅기는 면으로 반전시켜서 두점사이 직선의 거리를 구하면 됨
                 //endY -> {2(n-endY) + endY} = 2n-endY
                 //즉 목표좌표는 (endX,2n-endY)
@@ -38,7 +42,10 @@ int[] answer = new int[balls.length];
             //2. 아래쪽벽에 맞는 경우
             //반례 1의 반대 x1=x2 , y1>y2
             //endY -> {endY - 2endY} = -endY
-            if(!(stX == endX && stY > endY)){
+            if(stX == endX && stY > endY){
+                // continue;
+            }
+            else{
                 int calX = endX-stX;
                 int calY = ((-1) * endY) - stY;
                 length = Math.pow(calX, 2) + Math.pow(calY, 2);
@@ -51,7 +58,10 @@ int[] answer = new int[balls.length];
             //3. 왼쪽 벽에 맞는 경우
             //반례 x1>x2 , y1 = y2
             // endX - 2endX = -endX
-            if(!(stX > endX && stY == endY)){
+            if(stX > endX && stY == endY){
+                // continue;
+            }
+            else{
                 int calX = (-1*endX)-stX;
                 int calY = endY - stY;
                 length = Math.pow(calX, 2) + Math.pow(calY, 2);
@@ -62,7 +72,10 @@ int[] answer = new int[balls.length];
             //4. 오른쪽 벽에 맞는 경우
             //반례 3의 반대 : x1<x2 , y1=y2
             // endx -> endX + 2(M-endX) = 2M-endX
-            if(!(stX < endX && stY == endY)){
+            if(stX < endX && stY == endY){
+                // continue;                
+            }
+            else{
                 int calX = ((2*m) - endX) - stX;
                 int calY = endY - stY;
                 length = Math.pow(calX, 2) + Math.pow(calY, 2);
@@ -71,6 +84,6 @@ int[] answer = new int[balls.length];
                 }
             }
         }
-        return answer;    
-    }
+        return answer;
+        }
 }
