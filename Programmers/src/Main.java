@@ -1,18 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-<<<<<<< Updated upstream
-import LV2.BilliardsPractice;
-=======
 import LV2.SelfTicTactoe;
->>>>>>> Stashed changes
-import LV3.BannedUser;
-import LV3.BaseStationins;
-import LV3.BestAlbum;
-import LV3.BestSet;
-
-
-
 public class Main {
     public static void main(String[] args) throws IOException {  
         // // // //BufferReader 선언
@@ -41,32 +30,9 @@ public class Main {
         // // int[] result = test.solution(genres, plays);
         // //answser 0,3,1
 
-<<<<<<< Updated upstream
-
-        // String[] genres = {"pop", "pop", "pop", "rap", "rap"};
-        // int[] plays = {45, 50, 40, 60, 70};
-        // int[] result = test.solution(genres, plays);
-        // ////answer 1,0,4,3
-
-        // for(int i = 0 ; i<result.length ; i++){
-        //     System.out.print(result[i] + ",");
-        // }
-        
-        BilliardsPractice test = new BilliardsPractice();
-        // int balls[][] = {{7, 7}, {2, 7}, {7, 3}};
-        // int result[] = test.solution(10, 10, 3, 7, balls);
-        int balls[][] = {{1,2}};
-        int result[] = test.solution(3, 3, 1, 1, balls);
-
-        for(int i = 0 ;i< result.length; i++){
-            System.out.print(result[i] + ", ");
-        }
-       
-=======
         SelfTicTactoe test = new SelfTicTactoe();
         // String[] testcase = {"O.X", ".O.", "..X"};
         String[] testcase = {"OOO", "...", "XXX"};
         System.out.println(test.solution(testcase));
->>>>>>> Stashed changes
     }
 }
