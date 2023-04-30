@@ -1,7 +1,11 @@
 import java.io.*;
 import java.util.*;
 
+<<<<<<< Updated upstream
 import LV2.BilliardsPractice;
+=======
+import LV2.SelfTicTactoe;
+>>>>>>> Stashed changes
 import LV3.BannedUser;
 import LV3.BaseStationins;
 import LV3.BestAlbum;
@@ -37,6 +41,7 @@ public class Main {
         // // int[] result = test.solution(genres, plays);
         // //answser 0,3,1
 
+<<<<<<< Updated upstream
 
         // String[] genres = {"pop", "pop", "pop", "rap", "rap"};
         // int[] plays = {45, 50, 40, 60, 70};
@@ -57,5 +62,11 @@ public class Main {
             System.out.print(result[i] + ", ");
         }
        
+=======
+        SelfTicTactoe test = new SelfTicTactoe();
+        // String[] testcase = {"O.X", ".O.", "..X"};
+        String[] testcase = {"OOO", "...", "XXX"};
+        System.out.println(test.solution(testcase));
+>>>>>>> Stashed changes
     }
 }
