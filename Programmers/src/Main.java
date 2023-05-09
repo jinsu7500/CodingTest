@@ -1,7 +1,9 @@
 import java.io.*;
 import java.util.*;
 
-import LV2.SelfTicTactoe;
+import LV2.MineCraft;
+
+// import LV2.SelfTicTactoe;
 public class Main {
     public static void main(String[] args) throws IOException {  
         // // // //BufferReader 선언
@@ -30,9 +32,16 @@ public class Main {
         // // int[] result = test.solution(genres, plays);
         // //answser 0,3,1
 
-        SelfTicTactoe test = new SelfTicTactoe();
-        // String[] testcase = {"O.X", ".O.", "..X"};
-        String[] testcase = {"OOO", "...", "XXX"};
-        System.out.println(test.solution(testcase));
+        MineCraft test = new MineCraft();
+        int[] picks = {1,3,2};
+        String[] testarr = {"diamond", "diamond", "diamond", "iron", "iron", "diamond", "iron", "stone"};
+        // int[] picks = {0,1,1};
+        // String[] testarr = {"diamond", "diamond", "diamond", "diamond", "diamond", "iron", "iron", "iron", "iron", "iron", "diamond"};
+        
+        // int[] picks = {1,1,1};
+        // String[] testarr = {"stone", "stone", "stone", "stone", "stone", "diamond", "diamond", "diamond", "diamond", "diamond", "stone", "stone", "stone", "stone"};
+
+        System.out.println(test.solution(picks, testarr));
+
     }
 }
