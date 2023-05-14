@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 
 import LV2.MineCraft;
+import LV3.ReturnArmy;
 
 // import LV2.SelfTicTactoe;
 public class Main {
@@ -32,16 +33,16 @@ public class Main {
         // // int[] result = test.solution(genres, plays);
         // //answser 0,3,1
 
-        MineCraft test = new MineCraft();
-        int[] picks = {1,3,2};
-        String[] testarr = {"diamond", "diamond", "diamond", "iron", "iron", "diamond", "iron", "stone"};
-        // int[] picks = {0,1,1};
-        // String[] testarr = {"diamond", "diamond", "diamond", "diamond", "diamond", "iron", "iron", "iron", "iron", "iron", "diamond"};
-        
-        // int[] picks = {1,1,1};
-        // String[] testarr = {"stone", "stone", "stone", "stone", "stone", "diamond", "diamond", "diamond", "diamond", "diamond", "stone", "stone", "stone", "stone"};
+        ReturnArmy test = new ReturnArmy();
+        int n = 3;
+        int[][] roads = {{1,2},{2,3}};
+        int[] sources = {2,3};
+        int destination = 1;
 
-        System.out.println(test.solution(picks, testarr));
+        
+        
+        System.out.println(test.solution(n, roads, sources, destination));
+
 
     }
 }
