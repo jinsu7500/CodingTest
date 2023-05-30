@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+import LV2.HailWaterThermalIntegral;
 import LV2.MineCraft;
 import LV3.ReturnArmy;
 
@@ -33,15 +34,23 @@ public class Main {
         // // int[] result = test.solution(genres, plays);
         // //answser 0,3,1
 
-        ReturnArmy test = new ReturnArmy();
-        int n = 3;
-        int[][] roads = {{1,2},{2,3}};
-        int[] sources = {2,3};
-        int destination = 1;
+        // ReturnArmy test = new ReturnArmy();
+        // int n = 3;
+        // int[][] roads = {{1,2},{2,3}};
+        // int[] sources = {2,3};
+        // int destination = 1;
 
         
         
-        System.out.println(test.solution(n, roads, sources, destination));
+        // System.out.println(test.solution(n, roads, sources, destination));
+
+        HailWaterThermalIntegral test = new HailWaterThermalIntegral();
+        int[][] range = {{0,0},{0,-1},{2,-3},{3,-3}};
+        double[] test_out = test.solution(5, range);
+        
+        for(int i = 0; i < test_out.length ; i++){
+            System.out.println(test_out[i]);
+        }
 
 
     }
