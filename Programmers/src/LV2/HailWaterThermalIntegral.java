@@ -53,7 +53,7 @@ public class HailWaterThermalIntegral {
             int stPoint = ranges[i][0];                         // 기준점 0 부터 몇번째있는지
             int edPoint = yPoints.size() + ranges[i][1];        // 기준점 Max값에서 - 몇칸갔는지
 
-            if(stPoint >= edPoint || edPoint > ranges.length + 2){
+            if(stPoint > edPoint || edPoint > ranges.length + 2){
                 answer[i] = -1.0;
                 continue;
             }
