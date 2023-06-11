@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+import LV2.AssignmentProgress;
 import LV2.EatTheGround;
 import LV2.HailWaterThermalIntegral;
 import LV2.MineCraft;
@@ -52,11 +53,8 @@ public class Main {
         // for(int i = 0; i < test_out.length ; i++){
         //     System.out.println(test_out[i]);
         // }
-
-        EatTheGround test = new EatTheGround();
-        int[][] testrange = {{1,2,3,5},{5,6,7,8},{4,3,2,1}};
-        int[][] test2 = {{1,1,1,1}, {2,2,2,3}, {3,3,3,6}, {4,4,4,7}};
-        
-        System.out.println(test.solution(testrange));
+            AssignmentProgress test = new AssignmentProgress();
+            String[][] testcase = {{"test", "19:10", "20"},{"korean", "11:40", "30"}, {"english", "12:10", "20"}, {"math", "12:30", "40"}};
+            System.out.println(test.solution(testcase));
     }
 }

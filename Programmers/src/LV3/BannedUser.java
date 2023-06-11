@@ -258,7 +258,7 @@ public class BannedUser {
             //중복계산
             HashMap<String,Integer> chkDupMap = new HashMap<>();        
             for(int dupchkIndex = 0 ; dupchkIndex<user_id.length ; dupchkIndex++){
-                chkDupMap.put(user_id[dupchkIndex],chkDupMap.getOrDefault(user_id[dupchkIn  dex], 0) +1);  
+                // chkDupMap.put(user_id[dupchkIndex],chkDupMap.getOrDefault(user_id[dupchkIn  dex], 0) +1);  
             }
 
             // test.add("frodo");
