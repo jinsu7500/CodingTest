@@ -73,7 +73,7 @@ class Solution {
                 Plan nextPlan = PlanLS.peek();
 
                 //현재과제를 끝내고도 다음 과제까지 남아있는경우
-                if(nowTime + playTime < nextPlan.start)
+                if(nowTime + playTime <= nextPlan.start)
                 {
                     answer.add(name);       //다음과제 전에 지금과제 끝냈음으로 결과에 담아주기
                     nowTime += playTime;    //현재시간 갱신(작업한시간만큼 더해줌)
@@ -100,12 +100,12 @@ class Solution {
                         }
                     }
                 }
-                //현재 과제끝내자마자 다음과제 시작해야하는 시간일 경우(종료시간 == 다음시작시간)
-                else if (nowTime + playTime == nextPlan.start)
-                {
-                    answer.add(name);       //정답지에 작업완료된거 기입
-                    continue;
-                }
+                // //현재 과제끝내자마자 다음과제 시작해야하는 시간일 경우(종료시간 == 다음시작시간)
+                // else if (nowTime + playTime == nextPlan.start)
+                // {
+                //     answer.add(name);       //정답지에 작업완료된거 기입
+                //     continue;
+                // }
                 //다음과제 시작할시간이 되서, 중간에 하던거 저장해야할 경우
                 else
                 {
@@ -133,9 +133,10 @@ class Solution {
                 //스택에도 없는경우 체크
                 else
                 {
-                    answer.add(name);   //현재 꺼낸과제 완료
-                    break;
+                    
+//                     break;
                 }
+                answer.add(name);   //현재 꺼낸과제 완료
             }
             
 
