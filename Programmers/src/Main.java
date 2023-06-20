@@ -54,7 +54,16 @@ public class Main {
         //     System.out.println(test_out[i]);
         // }
             AssignmentProgress test = new AssignmentProgress();
-            String[][] testcase = {{"test", "19:10", "20"},{"korean", "11:40", "30"}, {"english", "12:10", "20"}, {"math", "12:30", "40"}};
-            System.out.println(test.solution(testcase));
+            // {"test", "19:10", "20"},
+            String[][] testcase = {{"korean", "11:40", "30"}, {"english", "12:10", "20"}, {"math", "12:30", "40"}};
+            String[][] testcase2 = {{"science", "12:40", "50"}, {"music", "12:20", "40"}, {"history", "14:00", "30"}, {"computer", "12:30", "100"}};
+            String[][] testcase3 = {{"aaa", "12:00", "20"}, {"bbb", "12:10", "30"}, {"ccc", "12:40", "10"}};
+
+            String[] answer = test.solution(testcase);
+            for(int i = 0 ; i<answer.length; i++)
+            {
+                System.out.print(answer[i] + ",");
+            }
     }
 }
+
