@@ -4,6 +4,7 @@ import java.util.*;
 import LV2.AssignmentProgress;
 import LV2.EatTheGround;
 import LV2.HailWaterThermalIntegral;
+import LV2.InterCeptionSys;
 import LV2.MineCraft;
 import LV3.GemsShopping;
 import LV3.ReturnArmy;
@@ -54,16 +55,18 @@ public class Main {
         // for(int i = 0; i < test_out.length ; i++){
         //     System.out.println(test_out[i]);
         // }
-            GemsShopping test = new GemsShopping();
+            InterCeptionSys test = new InterCeptionSys();
             // {"test", "19:10", "20"},
-            String[] testcase = {"DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"};
+            int[][] testcase = {{4,5},{4,8},{10,14},{11,13},{5,12},{3,7},{1,4}};
+            	
 
 
-            int[] answer = test.solution(testcase);
-            for(int i = 0 ; i<answer.length; i++)
-            {
-                System.out.print(answer[i] + ",");
-            }
+            int answer = test.solution(testcase);
+            System.out.println(answer);
+            // for(int i = 0 ; i<answer.length; i++)
+            // {
+            //     System.out.print(answer[i] + ",");
+            // }
     }
 }
 

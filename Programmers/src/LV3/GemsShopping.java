@@ -36,7 +36,7 @@ public class GemsShopping {
             que.add(gemName);
             map.put(gemName, map.getOrDefault(gemName, 0) + 1);
 
-            //투포인터 이용하여 범위 탐색
+            //범위 탐색
             while (true) {
                 String nowLeftGem = que.peek();    //현재 가장 좌측 보석
 
@@ -54,8 +54,8 @@ public class GemsShopping {
                 }
             }
 
-            //맵의 사이즈와, 해쉬셋의 사이즈가 같으면, 모든 보석을 다 담은것
-            // 이때의 큐의 시작지점과, 끝지점을 구한다.
+            // 맵의 사이즈와, 해쉬셋의 사이즈가 같으면, 모든 보석을 다 담은것            
+            // 이때 기존에 가지고있는 값보다 새로운 값이 작으면 정답 범위를 갱신!
             if (map.size() ==set.size() && leftToRight > que.size()) {
                 answerLeft = left;
                 leftToRight = que.size();
