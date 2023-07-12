@@ -1,6 +1,6 @@
 package LV3;
 
-public class BaseStationIns {
+public class BaseStationins {
     public int solution(int n, int[] stations, int w) {
         int now = 1; // 현재 위치
         int stationIdx = 0; // 기지국 idx
