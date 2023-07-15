@@ -1,6 +1,8 @@
+
+
 import java.util.HashSet;
 class Solution {
-    public int solution(int[] a) {
+     public int solution(int[] a) {
         int answer = 0;
 
         int left_min = Integer.MAX_VALUE;
