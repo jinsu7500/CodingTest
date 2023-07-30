@@ -1,5 +1,9 @@
 package LV3;
 
+/**
+ * 프로그래머스 LV3 : 풍선 터트리기
+ * https://school.programmers.co.kr/learn/courses/30/lessons/68646
+ */
 
 import java.util.HashSet;
 
