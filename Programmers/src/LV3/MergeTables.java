@@ -2,14 +2,11 @@ package LV3;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.StringTokenizer;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
+ * 프로그래머스 LV3_표병합 : https://school.programmers.co.kr/learn/courses/30/lessons/150366 * 
  * <요구사항>
  * 1. "UPDATE r c value"    : (r,c) 위치에 있는 값을 value로 변경
  * 2. "UPDATE value1 value" : value1 -> value2 값으로 변경
@@ -38,7 +35,7 @@ public class MergeTables {
     public static final String PRINT_COMMAND    = "PRINT";
 
      public String[] solution(String[] commands) {
-        String[] answer = {};
+        List<String> printString = new ArrayList<>();        
         List<Cell> table = new ArrayList<>();
 
         for(String sCommandLs : commands)
@@ -66,17 +63,32 @@ public class MergeTables {
                     }
                     break;
                 case MERGE_COMMAND:
+                    int r1 = Integer.parseInt(st.nextToken());
+                    int c1 = Integer.parseInt(st.nextToken());
+                    int r2 = Integer.parseInt(st.nextToken());
+                    int c2 = Integer.parseInt(st.nextToken());
+                    
+                    table = merge(r1, c1, r2, c2, table);
                     break;
                 case UNMERGE_COMMAND:
+                    int r3 = Integer.parseInt(st.nextToken());
+                    int c3 = Integer.parseInt(st.nextToken());
+                    table = unmerge(r3, c3, table);
                     break;
                 case PRINT_COMMAND:
+                    int r4 = Integer.parseInt(st.nextToken());
+                    int c4 = Integer.parseInt(st.nextToken());
+                    printString.add(print(r4, c4, table));
                     break;
                 default:
-                    System.out.println("에러");
+                    System.out.println("명령어 에러");
                     break;
 
             }
         }
+
+        //배열로 변환 및 출력
+        String[] answer = printString.toArray(new String[printString.size()]);
         return answer;
     }
     
@@ -103,16 +115,19 @@ public class MergeTables {
                                                 filterCell.getY() == c)
                           .collect(Collectors.toList());
             if(cellLs.isEmpty() == false ) cell = cellLs.get(0);        //좌표중복은 없다고 가정
+            else{
+                // cell = new Cell(r, c, value);
+            }            
         }
         
 
         //기존값 존재
         if(null != cell)
         {
-            System.out.println("cell X,Y : "  + cell.getX() + ","+ cell.getY() );
+            // System.out.println("cell X,Y : "  + cell.getX() + ","+ cell.getY() );
             // cell = new Cell(r, c, false, 0, 0, value, value);
             //병합체크
-            if(cell.isMerged == true)
+            if(cell.getIsMerged() == true)
             {
                 int parentX = cell.parentX;
                 int parentY = cell.parentY;
@@ -147,7 +162,7 @@ public class MergeTables {
 
 
     /**
-     * 업데이트 메서드2 
+     * 업데이트2 메서드
      * @param value1
      * @param value2
      * @param table
@@ -173,6 +188,242 @@ public class MergeTables {
     }
 
 
+    /**
+     * MERGE 메서드 
+     * @param r1
+     * @param c1
+     * @param r2
+     * @param c2
+     * @param table
+     * @return table
+     * EX) "MERGE r1 c1 r2 c2"
+     */
+    public List<Cell> merge(int r1, int c1, int r2, int c2, List<Cell> table)
+    {
+        List<Cell> leftCellLs = new ArrayList<>();
+        List<Cell> rightCellLs = new ArrayList<>();
+        Cell leftCell = null;
+        Cell rightCell = null;
+        String value = "";
+
+        //값이 같을경우
+        if(r1 == r2 && c1 == c2)
+        {
+            // System.out.println("머지값이 같음");
+            return table;
+        }
+        // System.out.println(table.isEmpty());
+         
+        //테이블에 해당값 탐색
+        leftCellLs = table.stream()
+                        .filter(filterCell ->   filterCell.getX() == r1 &&
+                                                filterCell.getY() == c1    )
+                        .collect(Collectors.toList());
+        if(leftCellLs.isEmpty() == false )
+        {
+            leftCell = leftCellLs.get(0);
+        }  
+        else
+        {
+            leftCell = new Cell(r1, c1, "");
+        }
+
+        //테이블에 해당값 탐색
+        rightCellLs = table.stream()
+                           .filter(filterCell ->  filterCell.getX() == r2 &&
+                                                  filterCell.getY() == c2    )                                                     
+                           .collect(Collectors.toList());
+
+        if(rightCellLs.isEmpty() == false )
+        {
+            rightCell = rightCellLs.get(0);
+        }
+        else
+        {
+            rightCell = new Cell(r2, c2, "");
+        }
+        
+
+        //둘다 값이 있는경우 (r1,c1)의 값으로 세팅
+        if("".equals(leftCell.getValue()) == false && 
+           "".equals(rightCell.getValue()) == false )           
+        {
+            value = leftCell.getValue();            
+        }
+        //둘중 하나만 값이 있는경우
+        else if("".equals(leftCell.getValue()) == false || 
+                "".equals(rightCell.getValue()) == false)
+        {
+            value = "".equals(leftCell.getValue()) ? rightCell.getValue() : leftCell.getValue();                        
+        }
+        //둘다 값이 없는경우
+        else
+        {
+            value = "";
+        }
+        
+        table = mergedChk(leftCell, rightCell, value, r1, c1, table);
+        return table;
+    }
+
+
+    /**
+     * 추가병합 체크 및 병합처리
+     * @param leftCell
+     * @param rightCell
+     * @param value
+     * @param value
+     * @param 
+     * @param table
+     * @return List<Cell> table
+     */
+    public List<Cell> mergedChk(Cell leftCell, Cell rightCell,String value, int r1, int c1, List<Cell> table)
+    {
+        //병합된 셀 추가병합인지 체크
+        if(leftCell.getIsMerged() == true || rightCell.getIsMerged() == true)
+        {
+            // System.out.println("둘중하나만있는경우의 추가병합값 : " + value);                
+            int rightParentX = rightCell.parentX;
+            int rightParentY = rightCell.parentY;
+
+            //오른쪽 병합된셀이 없을경우
+            if(rightCell.getIsMerged() == false)
+            {
+                table.remove(rightCell);
+                rightCell.setParentX(leftCell.getParentX());
+                rightCell.setParentY(leftCell.getParentY());
+                rightCell.setValue(value);
+                rightCell.setIsMerged(true);
+                table.add(rightCell);
+            }
+             //오른쪽 병합된 모든셀 탐색
+            else
+            { 
+                List<Cell> RightmergedCellLs =  table.stream()
+                                                .filter(filterCell ->   filterCell.getParentX() == rightParentX &&
+                                                                        filterCell.getParentY() == rightParentY    )
+                                                .collect(Collectors.toList());
+                //수정
+                for(Cell updateCell : RightmergedCellLs)
+                {
+                    table.remove(updateCell);                        
+                    updateCell.setParentX(leftCell.getParentX());
+                    updateCell.setParentY(leftCell.getParentY());
+                    updateCell.setValue(value);
+                    updateCell.setIsMerged(true);
+                    table.add(updateCell);
+                }
+            }
+        }
+
+        else
+        {            
+            // System.out.println("최초 병합값 : " + value);
+
+            table.remove(leftCell);
+            table.remove(rightCell);
+
+            leftCell.setIsMerged(true);
+            rightCell.setIsMerged(true);
+
+            leftCell.setValue(value);
+            rightCell.setValue(value);
+
+            leftCell.setParentX(r1);
+            leftCell.setParentY(c1);
+
+            rightCell.setParentX(r1);
+            rightCell.setParentY(c1);
+
+            table.add(leftCell);
+            table.add(rightCell); 
+        }        
+        return table;
+    }
+
+
+
+    /**
+     * 표 병합 해제 메서드
+     * @param r
+     * @param c
+     * @param table
+     * @return List<Cell> table
+     * EX) "UNMERGE 1 4"
+     */
+    public List<Cell> unmerge(int r, int c, List<Cell> table)    
+    {
+        Cell selectedCell = null;
+        List<Cell> selectedCellLs = table.stream()
+                                         .filter(filterCell  ->  filterCell.getX() == r &&
+                                                                 filterCell.getY() == c    )
+                                         .collect(Collectors.toList());
+
+        if(selectedCellLs.isEmpty() == false )
+        {
+            selectedCell = selectedCellLs.get(0);
+            
+            int parentX = selectedCell.getParentX();
+            int parentY = selectedCell.getParentY();
+
+            //병합된 모든셀 탐색
+            List<Cell> mergedCellLs =  table.stream()
+                                            .filter(filterCell ->   filterCell.getParentX() == parentX &&
+                                                                    filterCell.getParentY() == parentY    )
+                                            .collect(Collectors.toList());
+            
+            //기존값 삭제
+            for(Cell updateCell : mergedCellLs)
+            {
+                table.remove(updateCell);               
+                
+
+            }
+
+            //병합해제된 셀 추가
+            selectedCell.setIsMerged(false);
+            selectedCell.setValue(selectedCell.getValue());
+            selectedCell.setParentX(0);
+            selectedCell.setParentY(0);
+            table.add(selectedCell);
+        }  
+        else
+        {
+            System.out.println("unmerger 에러, 셀을 찾지못함");
+        }
+        return table;
+    }
+
+    /**
+     * 출력함수
+     * @param r
+     * @param c
+     * @param table
+     * @return String printString
+     */
+    public String print(int r, int c , List<Cell> table)
+    {
+        String printString = "EMPTY";
+        Cell selectedCell = null;
+        List<Cell> selectedCellLs = table.stream()
+                                         .filter(filterCell  ->  filterCell.getX() == r &&
+                                                                 filterCell.getY() == c    )
+                                         .collect(Collectors.toList());
+
+        if(selectedCellLs.isEmpty() == false )
+        {
+            selectedCell = selectedCellLs.get(0);
+            if("".equals(selectedCell.getValue()) == false) 
+            {
+                printString = selectedCell.getValue();    
+            }
+            
+        }       
+        System.out.println(printString);
+        return printString;
+    }
+
+/****************************************Data Class Cell ***************************************************************/
     public class Cell
     {
         private int x;
@@ -200,7 +451,7 @@ public class MergeTables {
             this.y = y;
         }
 
-        public boolean isIsMerged() {
+        public boolean getIsMerged() {
             return this.isMerged;
         }
 
@@ -261,5 +512,3 @@ public class MergeTables {
         
     }
 }
-
-
