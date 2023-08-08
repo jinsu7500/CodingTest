@@ -1,0 +1,4 @@
+    SELECT A.* 
+      FROM USER_INFO A
+    WHERE 1=1
+      AND TO_CHAR(A.JOINED,'YYYY') = '2021'    
