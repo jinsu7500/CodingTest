@@ -30,6 +30,3 @@ GROUP BY M.AUTHOR_ID
        , M.CATEGORY
 ORDER BY M.AUTHOR_ID 
        , M.CATEGORY DESC
- 
-
-         
