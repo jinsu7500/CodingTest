@@ -1,0 +1,17 @@
+-- SELECT CASE WHEN TO_DATE('20221016','YYYYMMDD') >  A.START_DATE 
+--              AND TO_DATE('20221016','YYYYMMDD') <= A.END_DATE 
+--             THEN '대여중'
+--             ELSE '대여가능'
+--             END AS AVAILABILITY 
+--      , A.*
+SELECT A.CAR_ID
+     , MAX(CASE WHEN TO_DATE('20221016','YYYYMMDD') BETWEEN A.START_DATE AND A.END_DATE
+            THEN '대여중'
+            ELSE '대여 가능'
+            END) AS AVAILABILITY
+  FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY A
+ WHERE 1=1 
+ GROUP BY A.CAR_ID
+ ORDER BY A.CAR_ID DESC
+ 
+  
