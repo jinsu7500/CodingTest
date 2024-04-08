@@ -1,75 +1,110 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
-<<<<<<< Updated upstream
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.OutputStreamWriter;
 
-import LV2.pairTwoCircles;
-import LV3.MergeTables;
-=======
->>>>>>> Stashed changes
 
-// import LV2.SelfTicTactoe;
 public class Main {
     public static void main(String[] args) throws IOException {  
-    //     // //BufferReader 선언
-    //     BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));  
-    //     StringTokenizer st = new StringTokenizer(bfr.readLine(), " ");
-    //     int H = Integer.parseInt(st.nextToken());
-    //     int W = Integer.parseInt(st.nextToken());
-    //     int X = Integer.parseInt(st.nextToken());
-    //     int Y = Integer.parseInt(st.nextToken());
+        // //BufferReader 선언
+        BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));  
+        BufferedWriter bwr = new BufferedWriter(new OutputStreamWriter(System.out));
 
-    //     int[][] arrayB = new int[H+X][W+Y];
-    //     int[][] arrayA = new int[H][W];
+        int size = Integer.parseInt(bfr.readLine());
 
-    //     //arrayB 입력
-    //     for(int i = 0; i < H+X ; i++)
-    //     {
-    //         st = new StringTokenizer(bfr.readLine(), " ");
-    //         for(int j = 0;j < W+Y ; j++)
-    //         {
-    //             arrayB[i][j] = Integer.parseInt(st.nextToken());
-    //         }
-    //     }        
+        //스택생성
+        MakeIntgerStack stack = new MakeIntgerStack(size);
+        
+        for(int i = 0 ; i< size ; i++)
+        {
+            String input[] = bfr.readLine().split(" ");
+            
+            switch (input[0]) {
 
-    //     //arrayA 입력
-    //     for(int i = 0 ; i < H ; i++)
-    //     {
-    //       for(int j = 0 ; j<W; j++)
-    //       {
-    //         if(i - X >= 0 &&  j - Y >=0)
-    //         {
-    //             arrayA[i][j] = arrayB[i][j] - arrayA[i-X][j-Y];
-    //         }
-    //         else
-    //         {
-    //             arrayA[i][j] = arrayB[i][j];
-    //         }
-    //       }
-    //     }
-
-    //     //출력
-    //     for(int i = 0 ; i < H; i++)
-    //     {
-    //         for(int j = 0 ; j < W ; j++)
-    //         {
-    //             System.out.print(arrayA[i][j] + " ");
-    //         }
-    //         System.out.println();
-    //     }
-<<<<<<< Updated upstream
-    // MergeTables test = new MergeTables();
-    // String[] testCase = {"UPDATE 1 1 menu", "UPDATE 1 2 category", "UPDATE 2 1 bibimbap", "UPDATE 2 2 korean", "UPDATE 2 3 rice", "UPDATE 3 1 ramyeon", "UPDATE 3 2 korean", "UPDATE 3 3 noodle", "UPDATE 3 4 instant", "UPDATE 4 1 pasta", "UPDATE 4 2 italian", "UPDATE 4 3 noodle", "MERGE 1 2 1 3", "MERGE 1 3 1 4", "UPDATE korean hansik", "UPDATE 1 3 group", "UNMERGE 1 4", "PRINT 1 3", "PRINT 1 4"};
-    // String[] testCase2 = {"UPDATE 1 1 menu", "UPDATE 1 1 category","UPDATE category merororn"};
-    // System.out.println(test.solution(testCase2));
-
-    pairTwoCircles test = new pairTwoCircles();
-    System.out.println(test.solution(2, 3));
-=======
-       
-
-    // test.solution(testCase);
->>>>>>> Stashed changes
+                // 정수 X를 스택에 넣는다.
+                case "1":  
+                    stack.push(Integer.parseInt(input[1]));
+                    break;
+                // 스택에 정수가 있다면 맨 위의 정수를 빼고 출력한다. 없다면 -1을 대신 출력한다.
+                case "2":
+                    bwr.write(String.valueOf(stack.pop()) + "\n");
+                    break;
+                //스택에 들어있는 정수의 개수를 출력한다.
+                case "3":
+                bwr.write(String.valueOf(stack.getSize()) + "\n");
+                    break;
+                // 스택이 비어있으면 1, 아니면 0을 출력한다.
+                case "4":
+                    bwr.write(String.valueOf(stack.isEmpty()) + "\n");
+                    break;
+                //스택에 정수가 있다면 맨 위의 정수를 출력한다. 없다면 -1을 대신 출력한다.
+                case "5":
+                    bwr.write(String.valueOf(stack.getTop()) + "\n");
+                    break;                    
+            
+                default:
+                    break;
+            }
+        }
+        bwr.flush();
+        bwr.close();
+        bfr.close();
     }
+}
+
+class MakeIntgerStack
+{
+    int top;
+    int size;
+    int arr[];
+
+    //생성자
+    public MakeIntgerStack(int inputSize)
+    {
+        this.top = 0;
+        this.size = 0;
+        this.arr = new int[inputSize];
+    }
+
+    void push(int item)
+    {
+        size++;
+        top++;
+        arr[top] = item;        
+    }
+    int pop ()
+    {
+        if(size == 0) 
+        {
+			return -1;
+		}else 
+        {
+			size--;
+			int pop = arr[top];
+			arr[top--] = 0;
+			return pop;
+		}
+        
+    }
+    int getSize() {
+		return size;
+	}
+	
+	int isEmpty() {
+		if(size == 0) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
+	int getTop() {
+		if(size == 0) {
+			return -1;
+		}else {
+			return arr[top];
+		}
+	}
 }
 
