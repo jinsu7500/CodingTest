@@ -88,7 +88,14 @@ public class MergeTables {
         }
 
         //배열로 변환 및 출력
-        String[] answer = printString.toArray(new String[printString.size()]);
+        // String[] answer = printString.toArray(new String[printString.size()]);
+        String[] answer = new String[printString.size()];
+        int count = 0;
+        for(String s : printString)
+        {            
+            answer[count] = s;
+            count++;
+        }
         return answer;
     }
     
@@ -120,7 +127,6 @@ public class MergeTables {
             }            
         }
         
-
         //기존값 존재
         if(null != cell)
         {
@@ -359,33 +365,38 @@ public class MergeTables {
                                                                  filterCell.getY() == c    )
                                          .collect(Collectors.toList());
 
-        if(selectedCellLs.isEmpty() == false )
-        {
+        if(selectedCellLs.isEmpty() == false)
+        {            
             selectedCell = selectedCellLs.get(0);
-            
-            int parentX = selectedCell.getParentX();
-            int parentY = selectedCell.getParentY();
 
-            //병합된 모든셀 탐색
-            List<Cell> mergedCellLs =  table.stream()
-                                            .filter(filterCell ->   filterCell.getParentX() == parentX &&
-                                                                    filterCell.getParentY() == parentY    )
-                                            .collect(Collectors.toList());
-            
-            //기존값 삭제
-            for(Cell updateCell : mergedCellLs)
+            if(selectedCell.getIsMerged() == true)
             {
-                table.remove(updateCell);               
+                int parentX = selectedCell.getParentX();
+                int parentY = selectedCell.getParentY();
+
+                //병합된 모든셀 탐색
+                List<Cell> mergedCellLs =  table.stream()
+                                                .filter(filterCell ->   filterCell.getParentX() == parentX &&
+                                                                        filterCell.getParentY() == parentY    )
+                                                .collect(Collectors.toList());
                 
+                //기존값 삭제
+                for(Cell updateCell : mergedCellLs)
+                {
+                    table.remove(updateCell);               
+                    
 
+                }
+
+                //병합해제된 셀 추가
+                selectedCell.setIsMerged(false);
+                selectedCell.setValue(selectedCell.getValue());
+                selectedCell.setParentX(0);
+                selectedCell.setParentY(0);
+                table.add(selectedCell);
             }
-
-            //병합해제된 셀 추가
-            selectedCell.setIsMerged(false);
-            selectedCell.setValue(selectedCell.getValue());
-            selectedCell.setParentX(0);
-            selectedCell.setParentY(0);
-            table.add(selectedCell);
+            
+            
         }  
         else
         {
