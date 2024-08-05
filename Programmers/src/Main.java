@@ -5,101 +5,81 @@ import java.util.Stack;
 
 
 public class Main {
+    public static final String CONST_PERIOD = ".";
+
     public static void main(String[] args) throws IOException {  
-        // //BufferReader 선언
+        //BufferReader 
         BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));  
-        // // BufferedWriter bwr = new BufferedWriter(new OutputStreamWriter(System.out));
+        
+        //StringBuilder
+        StringBuilder sb = new StringBuilder();
 
-        String output  = "";
-        boolean bYN = true;
+        String inputString  = "";
 
-        for(;;)
+        while(true)
         {
-            Stack<Character> stack = new Stack<>();
-            String inputText = bfr.readLine();
-            if(inputText == ".") { break; }
-            
-            for(int i = 0 ; i < inputText.length(); i++)
+            inputString = bfr.readLine();
+
+            if(inputString.equals(CONST_PERIOD))
             {
-                
-
-                char chk = inputText.charAt(i);
-
-                if(chk == '(' || chk == '[')
-                {
-                    stack.push(chk);
-                }
-                else if (chk == ')')
-                {
-                    if(stack.isEmpty() || stack.peek() != '(')
-                    {
-                        output = "no";
-                        bYN = false;
-                        System.out.println(output);
-                        break;
-                    }
-                    else
-                    {
-                        stack.pop();
-                    }
-                }
-                else if (chk == ']')
-                {
-                    if(stack.isEmpty() || stack.peek() != '[')
-                    {                        
-                        output = "no";
-                        bYN = false;
-                        System.out.println(output);
-                        break;
-                    }
-                    else
-                    {
-                        stack.pop();
-                    }
-                }
-
-            }
-
-            if(stack.isEmpty() &&  bYN == true)
-            {
-                output = "yes";
                 break;
             }
 
-            
+            //output
+            sb.append(IsBalance(inputString)).append('\n');
             
         }
-        System.out.println(output);
-        
-        // int size = Integer.parseInt(bfr.readLine());       
-        
+        System.out.println(sb);
+    }
 
-        // for(int i = 0 ; i < size ; i++)
-        // {
-        //     Stack<Character> stack = new Stack<>();
-        //     String inputText = bfr.readLine();
-        //     boolean bYN = true;
+    public static String IsBalance(String input)
+    {
+        Stack<Character> stack = new Stack<>();
 
-        //     for(int j = 0 ; j <inputText.length() ; j++)
-        //     {
-        //         if(inputText.charAt(j) == '(')
-        //         {
-        //             stack.push(inputText.charAt(j));
-        //         }
-        //         else if(stack.isEmpty())
-        //         {
-        //             bYN = false;
-        //             break;
-        //         }
-        //         else
-        //         {
-        //             stack.pop();
-        //         }
-        //     }
-        //     System.out.println(bYN && stack.isEmpty() ? "YES" :  "NO");
-               
-        // } 
-        bfr.close();
+        //loop 
+        for(int i = 0; i < input.length(); i++) {
+			
+			char charAt = input.charAt(i);	
+			
+			// push
+			if(charAt == '(' || charAt == '[') {
+				stack.push(charAt);
+			}
+			
+			// pop ')'
+			else if(charAt == ')') {
+				
+				// not balance
+				if(stack.empty() || stack.peek() != '(') {
+					return "no";
+				}
+				else {
+					stack.pop();
+				}
+			}
+
+
+			// pop ']'
+			else if(charAt == ']') {
+				
+				// not balance
+				if(stack.empty() || stack.peek() != '[') {
+					return "no";
+				}
+				else {
+					stack.pop();
+				}
+			}
+			
+		}
+		
+		if(stack.empty()) {
+			return "yes";
+		}
+		else {
+			return "no";
+		}
+        
     }
 }
 
